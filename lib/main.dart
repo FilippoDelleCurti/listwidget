@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fase1ListView',
+      title: 'Fase2ListView_SharedPreference',
       home: MyHomePage(),
     );
   }
@@ -29,6 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
       items.add(controller.text);
       controller.clear();
     });
+  }
+
+  Future<void> _loadCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {items = prefs.getStringList('items')?[];});
   }
 
   @override
