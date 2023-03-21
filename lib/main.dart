@@ -32,11 +32,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> _loadCounter() async {
-    final prefs = await SharedPreferences.getInstance();
+  /*Future<void> _loadCounter() async {
+   final prefs = await SharedPreferences.getInstance();
     setState(() {items = prefs.getStringList('items')?[];});
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
