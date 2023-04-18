@@ -82,9 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.directions_car)),
-              Tab(icon: Icon(Icons.directions_transit)),
-              Tab(icon: Icon(Icons.directions_bike)),
+              Tab(icon: Text("Prima priorità")),
+              Tab(icon: Text("Seconda priorità")),
+              Tab(icon: Text("Terza priorità")),
             ],
           ),
           title: const Text('Tabs Demo'),
@@ -95,10 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
-                    itemCount: items.length,
+                    itemCount: p1.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text('${items[index]}'),
+                        title: Text('${p1[index]}'),
                       );
                     },
                   ),
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: addItemToList,
+                  onPressed: addItemToListP1,
                   child: Text('Aggiungi materia'),
                 ),
               ],
@@ -122,10 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
-                    itemCount: items.length,
+                    itemCount: p2.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text('${items[index]}'),
+                        title: Text('${p2[index]}'),
                       );
                     },
                   ),
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: addItemToList,
+                  onPressed: addItemToListP2,
                   child: Text('Aggiungi materia'),
                 ),
               ],
@@ -149,10 +149,10 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
-                    itemCount: items.length,
+                    itemCount: p3.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text('${items[index]}'),
+                        title: Text('${p3[index]}'),
                       );
                     },
                   ),
@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: addItemToList,
+                  onPressed: addItemToListP3,
                   child: Text('Aggiungi materia'),
                 ),
               ],
@@ -178,71 +178,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-//vedi tabview
-
-/*void main() {
-  runApp(const TabBarDemo());
-}
-
-class TabBarDemo extends StatelessWidget {
-  const TabBarDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
-              ],
-            ),
-            title: const Text('Tabs Demo'),
-          ),
-          body: const TabBarView(
-            children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
- */
-
-/*Column(
-children: <Widget>[
-Expanded(
-child: ListView.builder(
-itemCount: items.length,
-itemBuilder: (context, index) {
-return ListTile(
-title: Text('${items[index]}'),
-);
-},
-),
-),
-Padding(
-padding: const EdgeInsets.all(16.0),
-child: TextField(
-controller: controller,
-decoration: InputDecoration(
-hintText: 'Inserisci la materia che desideri studiare',
-),
-),
-),
-ElevatedButton(
-onPressed: addItemToList,
-child: Text('Aggiungi materia'),
-),
-],
-),
-*/
