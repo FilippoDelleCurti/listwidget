@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> p1 = [];
   List<String> p2 = [];
   List<String> p3 = [];
+  String _selection = "";
 
   TextEditingController controller = TextEditingController();
 
@@ -97,8 +98,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p1.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${p1[index]}'),
+                      return PopupMenuButton<String>(
+                        onSelected: (String value) {
+                          setState(() {
+                            _selection = value;
+                            switch(value){
+                              case "UnoaDue":
+                                p2.add(p1[index]);
+                                p1.removeAt(index);
+                                break;
+                              case "UnoaTre":
+                                p3.add(p1[index]);
+                                p1.removeAt(index);
+                                break;
+                              case "eliminaUno":
+                                p1.removeAt(index);
+                                break;
+                            }
+                          });
+                        },
+                        child: ListTile(
+                          title: Text('${p1[index]}'),
+                        ),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: 'UnoaDue',
+                            child: Text('Sposta in Seconda'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'UnoaTre',
+                            child: Text('Sposta in Terza'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'eliminaUno',
+                            child: Text('Elimina'),
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -124,8 +159,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p2.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${p2[index]}'),
+                      return PopupMenuButton<String>(
+                        onSelected: (String value) {
+                          setState(() {
+                            _selection = value;
+                            switch(value){
+                              case "DueaUno":
+                                p1.add(p2[index]);
+                                p2.removeAt(index);
+                                break;
+                              case "DueaTre":
+                                p3.add(p2[index]);
+                                p2.removeAt(index);
+                                break;
+                              case "eliminaDue":
+                                p2.removeAt(index);
+                                break;
+                            }
+                          });
+                        },
+                        child: ListTile(
+                          title: Text('${p2[index]}'),
+                        ),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: 'DueaUno',
+                            child: Text('Sposta in Prima'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'DueaTre',
+                            child: Text('Sposta in Terza'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'eliminaDue',
+                            child: Text('Elimina'),
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -151,8 +220,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p3.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${p3[index]}'),
+                      return PopupMenuButton<String>(
+                        onSelected: (String value) {
+                          setState(() {
+                            _selection = value;
+                            switch(value){
+                              case "TreaUno":
+                                p1.add(p3[index]);
+                                p3.removeAt(index);
+                                break;
+                              case "TreaDue":
+                                p2.add(p3[index]);
+                                p3.removeAt(index);
+                                break;
+                              case "eliminaTre":
+                                p3.removeAt(index);
+                                break;
+                            }
+                          });
+                        },
+                        child: ListTile(
+                          title: Text('${p3[index]}'),
+                        ),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: 'TreaUno',
+                            child: Text('Sposta in Prima'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'TreaDue',
+                            child: Text('Sposta in Seconda'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'eliminaTre',
+                            child: Text('Elimina'),
+                          ),
+                        ],
                       );
                     },
                   ),
