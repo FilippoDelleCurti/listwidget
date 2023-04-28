@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onSelected: (String value) {
                           setState(() {
                             _selection = value;
-                            switch(value){
+                            switch (value) {
                               case "UnoaDue":
                                 p2.add(p1[index]);
                                 p1.removeAt(index);
@@ -118,9 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                         child: ListTile(
+                          leading: FlutterLogo(size: 56.0),
                           title: Text('${p1[index]}'),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/Descrizione');
+                          },
                         ),
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
                           const PopupMenuItem<String>(
                             value: 'UnoaDue',
                             child: Text('Sposta in Seconda'),
@@ -163,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onSelected: (String value) {
                           setState(() {
                             _selection = value;
-                            switch(value){
+                            switch (value) {
                               case "DueaUno":
                                 p1.add(p2[index]);
                                 p2.removeAt(index);
@@ -181,7 +186,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ListTile(
                           title: Text('${p2[index]}'),
                         ),
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
                           const PopupMenuItem<String>(
                             value: 'DueaUno',
                             child: Text('Sposta in Prima'),
@@ -224,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onSelected: (String value) {
                           setState(() {
                             _selection = value;
-                            switch(value){
+                            switch (value) {
                               case "TreaUno":
                                 p1.add(p3[index]);
                                 p3.removeAt(index);
@@ -242,7 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ListTile(
                           title: Text('${p3[index]}'),
                         ),
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
                           const PopupMenuItem<String>(
                             value: 'TreaUno',
                             child: Text('Sposta in Prima'),
