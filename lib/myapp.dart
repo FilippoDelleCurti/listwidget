@@ -74,7 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-//sostituire nomi liste
+  _showPopupMenu(Offset offset) async {
+    double left = offset.dx;
+    double top = offset.dy;
+    await showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(left, top, 0, 0),
+      items: [
+        PopupMenuItem<String>(child: const Text('Doge'), value: 'Doge'),
+        PopupMenuItem<String>(child: const Text('Lion'), value: 'Lion'),
+      ],
+      elevation: 8.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -118,11 +131,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                         child: ListTile(
-                          leading: FlutterLogo(size: 56.0),
+                          leading: GestureDetector(
+                              child: Icon(Icons.content_paste),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/Descrizione');
+                              }),
+                          trailing: GestureDetector(
+                            onTapDown: (TapDownDetails details) {
+                              _showPopupMenu(details.globalPosition);
+                            },
+                            child: Container(
+                              child: Icon(Icons.more_vert),
+                            ),
+                          ),
                           title: Text('${p1[index]}'),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Descrizione');
-                          },
                         ),
                         itemBuilder: (BuildContext context) =>
                             <PopupMenuEntry<String>>[
