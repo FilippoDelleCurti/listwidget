@@ -74,14 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _showPopupMenu(Offset offset) async {
+  _showPopupMenu1(Offset offset, int index) async {
     double left = offset.dx;
     double top = offset.dy;
     await showMenu(
       context: context,
       position: RelativeRect.fromLTRB(left, top, 0, 0),
       items: [
-        PopupMenuItem<String>(child: const Text('Doge'), value: 'Doge'),
+        PopupMenuItem<String>(
+          child: const Text('UnoaDue'),
+          value: 'UnoaDue',
+          onTap: () {
+            p2.add(p1[index]);
+            p1.removeAt(index);
+          },
+        ),
         PopupMenuItem<String>(child: const Text('Lion'), value: 'Lion'),
       ],
       elevation: 8.0,
@@ -138,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               }),
                           trailing: GestureDetector(
                             onTapDown: (TapDownDetails details) {
-                              _showPopupMenu(details.globalPosition);
+                              _showPopupMenu1(details.globalPosition, index);
                             },
                             child: Container(
                               child: Icon(Icons.more_vert),
