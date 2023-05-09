@@ -51,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loadList();
   }
@@ -82,14 +81,116 @@ class _MyHomePageState extends State<MyHomePage> {
       position: RelativeRect.fromLTRB(left, top, 0, 0),
       items: [
         PopupMenuItem<String>(
-          child: const Text('UnoaDue'),
+          child: const Text('Sposta nella seconda priorità'),
           value: 'UnoaDue',
           onTap: () {
-            p2.add(p1[index]);
-            p1.removeAt(index);
+            setState(() {
+              p2.add(p1[index]);
+              p1.removeAt(index);
+            });
           },
         ),
-        PopupMenuItem<String>(child: const Text('Lion'), value: 'Lion'),
+        PopupMenuItem<String>(
+          child: const Text('Sposta nella terza priorità'),
+          value: 'UnoaTre',
+          onTap: () {
+            setState(() {
+              p3.add(p1[index]);
+              p1.removeAt(index);
+            });
+          },
+        ),
+        PopupMenuItem<String>(
+          child: const Text('Elimina'),
+          value: 'eliminaUno',
+          onTap: () {
+            setState(() {
+              p1.removeAt(index);
+            });
+          },
+        )
+      ],
+      elevation: 8.0,
+    );
+  }
+
+  _showPopupMenu2(Offset offset, int index) async {
+    double left = offset.dx;
+    double top = offset.dy;
+    await showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(left, top, 0, 0),
+      items: [
+        PopupMenuItem<String>(
+          child: const Text('Sposta nella prima priorità'),
+          value: 'DueaUno',
+          onTap: () {
+            setState(() {
+              p1.add(p2[index]);
+              p2.removeAt(index);
+            });
+          },
+        ),
+        PopupMenuItem<String>(
+          child: const Text('Sposta nella terza priorità'),
+          value: 'DueaTre',
+          onTap: () {
+            setState(() {
+              p3.add(p2[index]);
+              p2.removeAt(index);
+            });
+          },
+        ),
+        PopupMenuItem<String>(
+          child: const Text('Elimina'),
+          value: 'eliminaDue',
+          onTap: () {
+            setState(() {
+              p2.removeAt(index);
+            });
+          },
+        )
+      ],
+      elevation: 8.0,
+    );
+  }
+
+  _showPopupMenu3(Offset offset, int index) async {
+    double left = offset.dx;
+    double top = offset.dy;
+    await showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(left, top, 0, 0),
+      items: [
+        PopupMenuItem<String>(
+          child: const Text('Sposta nella prima priorità'),
+          value: 'TreaUno',
+          onTap: () {
+            setState(() {
+              p1.add(p3[index]);
+              p3.removeAt(index);
+            });
+          },
+        ),
+        PopupMenuItem<String>(
+          child: const Text('Sposta nella seconda priorità'),
+          value: 'TreaDue',
+          onTap: () {
+            setState(() {
+              p2.add(p3[index]);
+              p3.removeAt(index);
+            });
+          },
+        ),
+        PopupMenuItem<String>(
+          child: const Text('Elimina'),
+          value: 'eliminaTre',
+          onTap: () {
+            setState(() {
+              p3.removeAt(index);
+            });
+          },
+        )
       ],
       elevation: 8.0,
     );
@@ -118,56 +219,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p1.length,
                     itemBuilder: (context, index) {
-                      return PopupMenuButton<String>(
-                        onSelected: (String value) {
-                          setState(() {
-                            _selection = value;
-                            switch (value) {
-                              case "UnoaDue":
-                                p2.add(p1[index]);
-                                p1.removeAt(index);
-                                break;
-                              case "UnoaTre":
-                                p3.add(p1[index]);
-                                p1.removeAt(index);
-                                break;
-                              case "eliminaUno":
-                                p1.removeAt(index);
-                                break;
-                            }
-                          });
+                      return ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/Descrizione');
                         },
-                        child: ListTile(
-                          leading: GestureDetector(
-                              child: Icon(Icons.content_paste),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/Descrizione');
-                              }),
-                          trailing: GestureDetector(
-                            onTapDown: (TapDownDetails details) {
-                              _showPopupMenu1(details.globalPosition, index);
-                            },
-                            child: Container(
-                              child: Icon(Icons.more_vert),
-                            ),
+                        trailing: GestureDetector(
+                          onTapDown: (TapDownDetails details) {
+                            _showPopupMenu1(details.globalPosition, index);
+                          },
+                          child: Container(
+                            child: Icon(Icons.more_vert),
                           ),
-                          title: Text('${p1[index]}'),
                         ),
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'UnoaDue',
-                            child: Text('Sposta in Seconda'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'UnoaTre',
-                            child: Text('Sposta in Terza'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'eliminaUno',
-                            child: Text('Elimina'),
-                          ),
-                        ],
+                        title: Text('${p1[index]}'),
                       );
                     },
                   ),
@@ -193,43 +257,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p2.length,
                     itemBuilder: (context, index) {
-                      return PopupMenuButton<String>(
-                        onSelected: (String value) {
-                          setState(() {
-                            _selection = value;
-                            switch (value) {
-                              case "DueaUno":
-                                p1.add(p2[index]);
-                                p2.removeAt(index);
-                                break;
-                              case "DueaTre":
-                                p3.add(p2[index]);
-                                p2.removeAt(index);
-                                break;
-                              case "eliminaDue":
-                                p2.removeAt(index);
-                                break;
-                            }
-                          });
+                      return ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/Descrizione');
                         },
-                        child: ListTile(
-                          title: Text('${p2[index]}'),
+                        trailing: GestureDetector(
+                          onTapDown: (TapDownDetails details) {
+                            _showPopupMenu2(details.globalPosition, index);
+                          },
+                          child: Container(
+                            child: Icon(Icons.more_vert),
+                          ),
                         ),
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'DueaUno',
-                            child: Text('Sposta in Prima'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'DueaTre',
-                            child: Text('Sposta in Terza'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'eliminaDue',
-                            child: Text('Elimina'),
-                          ),
-                        ],
+                        title: Text('${p2[index]}'),
                       );
                     },
                   ),
@@ -255,43 +295,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView.builder(
                     itemCount: p3.length,
                     itemBuilder: (context, index) {
-                      return PopupMenuButton<String>(
-                        onSelected: (String value) {
-                          setState(() {
-                            _selection = value;
-                            switch (value) {
-                              case "TreaUno":
-                                p1.add(p3[index]);
-                                p3.removeAt(index);
-                                break;
-                              case "TreaDue":
-                                p2.add(p3[index]);
-                                p3.removeAt(index);
-                                break;
-                              case "eliminaTre":
-                                p3.removeAt(index);
-                                break;
-                            }
-                          });
+                      return ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/Descrizione');
                         },
-                        child: ListTile(
-                          title: Text('${p3[index]}'),
+                        trailing: GestureDetector(
+                          onTapDown: (TapDownDetails details) {
+                            _showPopupMenu3(details.globalPosition, index);
+                          },
+                          child: Container(
+                            child: Icon(Icons.more_vert),
+                          ),
                         ),
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'TreaUno',
-                            child: Text('Sposta in Prima'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'TreaDue',
-                            child: Text('Sposta in Seconda'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'eliminaTre',
-                            child: Text('Elimina'),
-                          ),
-                        ],
+                        title: Text('${p3[index]}'),
                       );
                     },
                   ),
