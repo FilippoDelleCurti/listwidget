@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
+import 'Parametri.dart';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -221,7 +223,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/Descrizione');
+                          Navigator.pushNamed(
+                            context,
+                            '/Descrizione',
+                            arguments: Parametri(
+                              1,
+                              index,
+                            ),
+                          );
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {
