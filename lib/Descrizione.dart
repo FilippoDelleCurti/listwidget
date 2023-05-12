@@ -38,6 +38,16 @@ class _DescrizioneState extends State<Descrizione> {
         title: Text("Dettaglio"),
       ),
       body: Text(title),
+      /*Container(
+        margin: EdgeInsets.all(20),
+        child: TextField(
+          controller: testopesoController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Peso (kg)...',
+          ),
+        ),
+      ),*/
     );
   }
 }
