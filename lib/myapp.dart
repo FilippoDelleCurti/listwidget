@@ -268,7 +268,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/Descrizione');
+                          Navigator.pushNamed(
+                            context,
+                            '/Descrizione',
+                            arguments: Parametri(
+                              2,
+                              index,
+                            ),
+                          );
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {
@@ -306,7 +313,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/Descrizione');
+                          Navigator.pushNamed(
+                            context,
+                            '/Descrizione',
+                            arguments: Parametri(
+                              3,
+                              index,
+                            ),
+                          );
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {

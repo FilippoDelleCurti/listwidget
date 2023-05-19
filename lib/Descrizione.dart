@@ -12,6 +12,9 @@ class Descrizione extends StatefulWidget {
 class _DescrizioneState extends State<Descrizione> {
   String title = "";
   List<String> p = [];
+  String testo = '';
+  TextEditingController testoController = TextEditingController();
+  TextEditingController descrizioneController = TextEditingController();
 
   Future<void> _loadList(int priorita, int index) async {
     final prefs = await SharedPreferences.getInstance();
@@ -26,6 +29,7 @@ class _DescrizioneState extends State<Descrizione> {
         }
       }
       title = p[index];
+      testoController.text = title;
     });
   }
 
@@ -34,20 +38,47 @@ class _DescrizioneState extends State<Descrizione> {
     final args = ModalRoute.of(context)!.settings.arguments as Parametri;
     _loadList(args.p, args.index);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Dettaglio"),
-      ),
-      body: Text(title),
-      /*Container(
-        margin: EdgeInsets.all(20),
-        child: TextField(
-          controller: testopesoController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Peso (kg)...',
-          ),
+        appBar: AppBar(
+          title: Text("Dettaglio"),
         ),
-      ),*/
-    );
+        body: Center(
+          child: Column(children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: testoController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Materia',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+
+                    /*child: TextField(
+                      controller: descrizioneController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Descrizione',
+                      ),*/
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {});
+              },
+              child: const Text('Salva'),
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text(testo),
+            )
+          ]),
+        ));
   }
 }
