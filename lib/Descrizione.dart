@@ -12,7 +12,9 @@ class Descrizione extends StatefulWidget {
 class _DescrizioneState extends State<Descrizione> {
   String title = "";
   List<String> p = [];
+  List<String> d = [];
   String testo = '';
+  bool caricato = false;
   TextEditingController testoController = TextEditingController();
   TextEditingController descrizioneController = TextEditingController();
 
@@ -21,6 +23,7 @@ class _DescrizioneState extends State<Descrizione> {
     setState(() {
       if (priorita == 1) {
         p = (prefs.getStringList('listP1') ?? []);
+
       } else {
         if (priorita == 2) {
           p = (prefs.getStringList('listP2') ?? []);
@@ -33,10 +36,38 @@ class _DescrizioneState extends State<Descrizione> {
     });
   }
 
+  void editItemList(int priorita, int index) {
+    setState(() {
+      p[index] = testoController.text;
+      _makeList(priorita);
+    });
+  }
+
+  Future<void> _makeList(int priorita) async {
+    final prefs = await SharedPreferences.getInstance();
+    switch(priorita){
+      case 1:
+        prefs.setStringList('listP1', p);
+        break;
+      case 2:
+        prefs.setStringList('listP2', p);
+        break;
+      case 3:
+        prefs.setStringList('listP3', p);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Parametri;
-    _loadList(args.p, args.index);
+    final args = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Parametri;
+    if(!caricato) {
+      _loadList(args.p, args.index);
+      caricato = true;
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text("Dettaglio"),
@@ -57,12 +88,12 @@ class _DescrizioneState extends State<Descrizione> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
 
-                    /*child: TextField(
+                    child: TextField(
                       controller: descrizioneController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Descrizione',
-                      ),*/
+                      ),
                     ),
                   ),
                 ],
@@ -70,9 +101,10 @@ class _DescrizioneState extends State<Descrizione> {
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {});
+                editItemList(args.p, args.index);
               },
               child: const Text('Salva'),
+
             ),
             Container(
               margin: EdgeInsets.all(20),
