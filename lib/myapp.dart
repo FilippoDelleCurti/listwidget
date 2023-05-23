@@ -230,7 +230,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               1,
                               index,
                             ),
-                          );
+                          ).then((_){
+                            _loadList();
+                          });
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {
@@ -275,7 +277,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               2,
                               index,
                             ),
-                          );
+                            ).then((_){
+                              _loadList();
+                          });
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {
@@ -320,7 +324,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               3,
                               index,
                             ),
-                          );
+                            ).then((_){
+                              _loadList();
+                            });
                         },
                         trailing: GestureDetector(
                           onTapDown: (TapDownDetails details) {
