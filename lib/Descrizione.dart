@@ -14,6 +14,7 @@ class _DescrizioneState extends State<Descrizione> {
   List<String> p = [];
   List<String> d = [];
   String testo = '';
+  String desc = '';
   bool caricato = false;
   TextEditingController testoController = TextEditingController();
   TextEditingController descrizioneController = TextEditingController();
@@ -23,22 +24,28 @@ class _DescrizioneState extends State<Descrizione> {
     setState(() {
       if (priorita == 1) {
         p = (prefs.getStringList('listP1') ?? []);
+        d = (prefs.getStringList('listD1') ?? []);
 
       } else {
         if (priorita == 2) {
           p = (prefs.getStringList('listP2') ?? []);
+          d = (prefs.getStringList('listD2') ?? []);
         } else {
           p = (prefs.getStringList('listP3') ?? []);
+          d = (prefs.getStringList('listD3') ?? []);
         }
       }
       title = p[index];
       testoController.text = title;
+      desc = d[index];
+      descrizioneController.text = desc;
     });
   }
 
   void editItemList(int priorita, int index) {
     setState(() {
       p[index] = testoController.text;
+      d[index] = descrizioneController.text;
       _makeList(priorita);
     });
   }
@@ -48,12 +55,15 @@ class _DescrizioneState extends State<Descrizione> {
     switch(priorita){
       case 1:
         prefs.setStringList('listP1', p);
+        prefs.setStringList('listD1', d);
         break;
       case 2:
         prefs.setStringList('listP2', p);
+        prefs.setStringList('listD2', d);
         break;
       case 3:
         prefs.setStringList('listP3', p);
+        prefs.setStringList('listD3', d);
         break;
     }
   }

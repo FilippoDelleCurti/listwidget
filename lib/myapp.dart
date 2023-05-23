@@ -23,6 +23,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> p1 = [];
   List<String> p2 = [];
   List<String> p3 = [];
+  List<String> d1 = [];
+  List<String> d2 = [];
+  List<String> d3 = [];
+
   String _selection = "";
 
   TextEditingController controller = TextEditingController();
@@ -30,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void addItemToListP1() {
     setState(() {
       p1.add(controller.text);
+      d1.add("");
       _makeList();
       controller.clear();
     });
@@ -38,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void addItemToListP2() {
     setState(() {
       p2.add(controller.text);
+      d2.add("");
       _makeList();
       controller.clear();
     });
@@ -46,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void addItemToListP3() {
     setState(() {
       p3.add(controller.text);
+      d3.add("");
       _makeList();
       controller.clear();
     });
@@ -63,6 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
       p1 = (prefs.getStringList('listP1') ?? []);
       p2 = (prefs.getStringList('listP2') ?? []);
       p3 = (prefs.getStringList('listP3') ?? []);
+      d1 = (prefs.getStringList('listD1') ?? []);
+      d2 = (prefs.getStringList('listD2') ?? []);
+      d3 = (prefs.getStringList('listD3') ?? []);
     });
   }
 
@@ -72,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
       prefs.setStringList('listP1', p1);
       prefs.setStringList('listP2', p2);
       prefs.setStringList('listP3', p3);
+      prefs.setStringList('listD1', d1);
+      prefs.setStringList('listD2', d2);
+      prefs.setStringList('listD3', d3);
     });
   }
 
@@ -89,6 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               p2.add(p1[index]);
               p1.removeAt(index);
+              d2.add(d1[index]);
+              d1.removeAt(index);
             });
           },
         ),
@@ -99,6 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               p3.add(p1[index]);
               p1.removeAt(index);
+              d3.add(d1[index]);
+              d1.removeAt(index);
             });
           },
         ),
@@ -108,6 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: () {
             setState(() {
               p1.removeAt(index);
+              d1.removeAt(index);
             });
           },
         )
